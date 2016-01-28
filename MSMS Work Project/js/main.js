@@ -1,6 +1,7 @@
 /*
 TO DO:
 - Scale down the distances for everything outer-belt? (If you're doing this it needs to be first priority)
+- Make Mars and Mercury slightly larger?
 - Add orbit lines
 - Animate orbits along lines
 - Brighten lights?
@@ -102,21 +103,21 @@ function uranus() {
     var geom = new THREE.SphereGeometry(3.69, 32, 16);
     var mat = new THREE.MeshLambertMaterial({color:0x1f7a7a});
     var badJoke = new THREE.Mesh(geom, mat);
-    badJoke.translateX(289.9895);
+    badJoke.translateX(218.3205); //distance between saturn and uranus halved
     scene.add(badJoke);
 }
 function neptune() {
     var geom = new THREE.SphereGeometry(3.5, 32, 16);
     var mat = new THREE.MeshLambertMaterial({color:0x0086b3});
     var nept = new THREE.Mesh(geom, mat);
-    nept.translateX(451.6545);
+    nept.translateX(379.9855); //everything else scales accordingly by subtracting 71.669
     scene.add(nept);
 }
 function pluto() {
     var geom = new THREE.SphereGeometry(0.95, 32, 16); //scaled up by a half because i couldnt see it
     var mat = new THREE.MeshLambertMaterial({color:0xffccb3});
     var plu = new THREE.Mesh(geom, mat);
-    plu.translateX(592.1615);
+    plu.translateX(520.4925);
     scene.add(plu);
 }
 
@@ -124,4 +125,3 @@ function render() {
 	requestAnimationFrame( render );
 	renderer.render( scene, camera );
 }
-console.log("sweet jesus everything turns tiny when you add gas giants");
