@@ -39,7 +39,7 @@ function init() {
     neptune();
     pluto();
     
-    sunlight(120, 120, 120, 0xfff5e5, 1); //get light yellow hex
+    sunlight(0, 0, 0, 0xfff5e5, 1); //get light yellow hex
     render();
 }
 
@@ -52,8 +52,9 @@ function sunlight( x, y, z, color, intensity ) {
 }
 //sun and planets
 function sol() {
+    var tex = THREE.ImageUtils.loadTexture( 'images/sun.jpg' );
     var geometry = new THREE.SphereGeometry( 10.926, 32, 16 ); //scaled down by a decimal place from earth scaling
-    var material = new THREE.MeshLambertMaterial( { color: 0xff8000 } );
+    var material = new THREE.MeshBasicMaterial( { map: tex } );
     var sun = new THREE.Mesh( geometry, material );
     scene.add( sun );
 }
