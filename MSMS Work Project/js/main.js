@@ -55,7 +55,7 @@ function sunlight( x, y, z, color, intensity ) {
 function sol() {
     var geometry = new THREE.SphereGeometry( 10.926, 32, 16 ); //scaled down by a decimal place from earth scaling
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/sun.jpg' ) : undefined);
-    var material = new THREE.MeshBasicMaterial( useTextures ? { map: tex ) : { color : 0xffff88 } );
+    var material = new THREE.MeshBasicMaterial( useTextures ? { map: tex } : { color : 0xffff88 } );
     var sun = new THREE.Mesh( geometry, material );
     scene.add( sun );
 }
