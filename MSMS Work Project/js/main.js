@@ -12,6 +12,7 @@ var renderer;
 var scene;
 var camera;
 var useTextures = true;
+var lineMat = new THREE.MeshBasicMaterial({color:0xffffff});
 
 function init() {
     scene = new THREE.Scene();
@@ -60,76 +61,130 @@ function sol() {
     scene.add( sun );
 }
 function mercury() {
+    //line
+    var line = new THREE.TorusGeometry(18.8095, 0.038, 6, 32);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geometry = new THREE.SphereGeometry(0.38, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mercury.jpg' ) : undefined);
     var material = new THREE.MeshLambertMaterial( useTextures? { map : tex } : {color:0x999999});
     var merc = new THREE.Mesh(geometry, material);
     merc.translateX(18.8095); //taking into account the slightly changed size of the sun
-    scene.add(merc);
+    orbit.add(merc);
 }
 function venus() {
+    //line
+    var line = new THREE.TorusGeometry(29.5822, 0.097, 6, 32);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geometry = new THREE.SphereGeometry(0.97, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/venus.jpg' ) : undefined);
     var material = new THREE.MeshLambertMaterial(useTextures ? {map : tex} : {color:0xffba33});
     var ven = new THREE.Mesh (geometry, material);
     ven.translateX(29.5822); //all distances have 18.8095 (mercury distance from sun) added to them
-    scene.add(ven);
+    orbit.add(ven);
 }
 function earth() {
+   //line
+    var line = new THREE.TorusGeometry(32.995, 0.1, 6, 32);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geometry = new THREE.SphereGeometry(1, 32, 16); //everything is scaled to earth size
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/earth.png' ) : undefined);
     var material = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x00b38e});
     var terra = new THREE.Mesh(geometry, material);
     terra.translateX(32.995);
-    scene.add(terra);
+    orbit.add(terra);
 }
 function mars() {
+    //line
+    var line = new THREE.TorusGeometry(41.4575, 0.053, 6, 32);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geom = new THREE.SphereGeometry(0.53, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mars.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xb34700});
     var ares = new THREE.Mesh(geom, mat);
     ares.translateX(41.4575);
-    scene.add(ares);
+    orbit.add(ares);
 }
 function jupiter() {
+    //line
+    var line = new THREE.TorusGeometry(81.3895, 0.474, 6, 64);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geom = new THREE.SphereGeometry(4.74, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/jupiter.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffcb80});
     var jove = new THREE.Mesh(geom, mat);
     jove.translateX(81.3895); //however, since we removed the asteroid belt after mars, we are now adding 3.9095 (width of asteroid belt (1 AU) subtracted from mercury's distance to the sun)
-    scene.add(jove);
+    orbit.add(jove);
 }
 function saturn() {
+    //line
+    var line = new THREE.TorusGeometry(146.6515, 0.5595, 6, 64);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geom = new THREE.SphereGeometry(5.595, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/saturn.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffffb3});
     var sat = new THREE.Mesh(geom, mat);
     sat.translateX(146.6515);
-    scene.add(sat);
+    orbit.add(sat);
 }
 function uranus() {
+    //line
+    var line = new THREE.TorusGeometry(218.3205, 0.369, 6, 64);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geom = new THREE.SphereGeometry(3.69, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/uranus.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x1f7a7a});
     var badJoke = new THREE.Mesh(geom, mat);
     badJoke.translateX(218.3205); //distance between saturn and uranus halved
-    scene.add(badJoke);
+    orbit.add(badJoke);
 }
 function neptune() {
+    //line
+    var line = new THREE.TorusGeometry(379.9855, 0.35, 6, 64);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geom = new THREE.SphereGeometry(3.5, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/neptune.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x0086b3});
     var nept = new THREE.Mesh(geom, mat);
     nept.translateX(379.9855); //everything else scales accordingly by subtracting 71.669
-    scene.add(nept);
+    orbit.add(nept);
 }
 function pluto() {
+    //line
+    var line = new THREE.TorusGeometry(520.4925, 0.095, 6, 64);
+    var orbit = new THREE.Mesh(line, lineMat);
+    orbit.rotation.x = Math.PI/2;
+    scene.add(orbit);
+    //planet
     var geom = new THREE.SphereGeometry(0.95, 32, 16); //scaled up by a half because i couldnt see it
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/pluto.png' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffccb3});
     var plu = new THREE.Mesh(geom, mat);
     plu.translateX(520.4925);
-    scene.add(plu);
+    orbit.add(plu);
 }
 
 function render() {
