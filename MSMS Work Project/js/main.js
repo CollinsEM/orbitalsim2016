@@ -55,14 +55,14 @@ function sunlight( x, y, z, color, intensity ) {
 function sol() {
     var geometry = new THREE.SphereGeometry( 10.926, 32, 16 ); //scaled down by a decimal place from earth scaling
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/sun.jpg' ) : undefined);
-    var material = new THREE.MeshBasicMaterial( { map: tex , color : 0xffff88 } );
+    var material = new THREE.MeshBasicMaterial( useTextures ? { map: tex ) : { color : 0xffff88 } );
     var sun = new THREE.Mesh( geometry, material );
     scene.add( sun );
 }
 function mercury() {
     var geometry = new THREE.SphereGeometry(0.38, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mercury.jpg' ) : undefined);
-    var material = new THREE.MeshLambertMaterial({ map : tex, color:0x999999});
+    var material = new THREE.MeshLambertMaterial( useTextures? { map : tex } : {color:0x999999});
     var merc = new THREE.Mesh(geometry, material);
     merc.translateX(18.8095); //taking into account the slightly changed size of the sun
     scene.add(merc);
@@ -70,7 +70,7 @@ function mercury() {
 function venus() {
     var geometry = new THREE.SphereGeometry(0.97, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/venus.jpg' ) : undefined);
-    var material = new THREE.MeshLambertMaterial({map : tex , color:0xffba33});
+    var material = new THREE.MeshLambertMaterial(useTextures ? {map : tex} : {color:0xffba33});
     var ven = new THREE.Mesh (geometry, material);
     ven.translateX(29.5822); //all distances have 18.8095 (mercury distance from sun) added to them
     scene.add(ven);
@@ -78,7 +78,7 @@ function venus() {
 function earth() {
     var geometry = new THREE.SphereGeometry(1, 32, 16); //everything is scaled to earth size
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/earth.png' ) : undefined);
-    var material = new THREE.MeshLambertMaterial({map:tex, color:0x00b38e});
+    var material = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x00b38e});
     var terra = new THREE.Mesh(geometry, material);
     terra.translateX(32.995);
     scene.add(terra);
@@ -86,7 +86,7 @@ function earth() {
 function mars() {
     var geom = new THREE.SphereGeometry(0.53, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mars.jpg' ) : undefined);
-    var mat = new THREE.MeshLambertMaterial({mat:tex, color:0xb34700});
+    var mat = new THREE.MeshLambertMaterial(useTextures ? {mat:tex} : {color:0xb34700});
     var ares = new THREE.Mesh(geom, mat);
     ares.translateX(41.4575);
     scene.add(ares);
@@ -94,7 +94,7 @@ function mars() {
 function jupiter() {
     var geom = new THREE.SphereGeometry(4.74, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/jupiter.jpg' ) : undefined);
-    var mat = new THREE.MeshLambertMaterial({mat:tex, color:0xffcb80});
+    var mat = new THREE.MeshLambertMaterial(useTextures ? {mat:tex} : {color:0xffcb80});
     var jove = new THREE.Mesh(geom, mat);
     jove.translateX(81.3895); //however, since we removed the asteroid belt after mars, we are now adding 3.9095 (width of asteroid belt (1 AU) subtracted from mercury's distance to the sun)
     scene.add(jove);
@@ -102,7 +102,7 @@ function jupiter() {
 function saturn() {
     var geom = new THREE.SphereGeometry(5.595, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/saturn.jpg' ) : undefined);
-    var mat = new THREE.MeshLambertMaterial({color:0xffffb3});
+    var mat = new THREE.MeshLambertMaterial(useTextures ? {mat:tex} : {color:0xffffb3});
     var sat = new THREE.Mesh(geom, mat);
     sat.translateX(146.6515);
     scene.add(sat);
@@ -110,7 +110,7 @@ function saturn() {
 function uranus() {
     var geom = new THREE.SphereGeometry(3.69, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/uranus.jpg' ) : undefined);
-    var mat = new THREE.MeshLambertMaterial({mat:tex, color:0x1f7a7a});
+    var mat = new THREE.MeshLambertMaterial(useTextures ? {mat:tex} : {color:0x1f7a7a});
     var badJoke = new THREE.Mesh(geom, mat);
     badJoke.translateX(218.3205); //distance between saturn and uranus halved
     scene.add(badJoke);
@@ -118,7 +118,7 @@ function uranus() {
 function neptune() {
     var geom = new THREE.SphereGeometry(3.5, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/neptune.jpg' ) : undefined);
-    var mat = new THREE.MeshLambertMaterial({mat:tex, color:0x0086b3});
+    var mat = new THREE.MeshLambertMaterial(useTextures ? {mat:tex} : {color:0x0086b3});
     var nept = new THREE.Mesh(geom, mat);
     nept.translateX(379.9855); //everything else scales accordingly by subtracting 71.669
     scene.add(nept);
@@ -126,7 +126,7 @@ function neptune() {
 function pluto() {
     var geom = new THREE.SphereGeometry(0.95, 32, 16); //scaled up by a half because i couldnt see it
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/pluto.png' ) : undefined);
-    var mat = new THREE.MeshLambertMaterial({mat:tex, color:0xffccb3});
+    var mat = new THREE.MeshLambertMaterial(useTextures ? {mat:tex} : {color:0xffccb3});
     var plu = new THREE.Mesh(geom, mat);
     plu.translateX(520.4925);
     scene.add(plu);
