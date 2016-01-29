@@ -1,19 +1,28 @@
 /*
 TO DO:
-- Scale down the distances for everything outer-belt? (If you're doing this it needs to be first priority)
-- Make Mars and Mercury slightly larger?
-- Add orbit lines
 - Animate orbits along lines
-- Brighten lights?
-- Texture maps? (good luck buddy)
 */
 
+//global planet variables
+var merc;
+var ven;
+var terra;
+var ares;
+//global variables
 var renderer;
 var scene;
 var camera;
 var useTextures = true;
 var lineMat = new THREE.MeshBasicMaterial({color:0xffffff});
+//eccentricity values for each planet respectively
+var ecc = [0.205627, 0.006793, 0.016726, 0.093368, 0.048435, 0.055682, 0.047209, 0.008575, 0.250236];
+//semi-major axis values for each planet respectively
+var sma = [0.38709893, 0.72333199, 1.00000011, 1.52366231, 5.20336301, 9.53707032, 19.19126393, 30.06896348, 39.48168677];
+function orbitSpeed (a, e) {
+    
+}
 
+//initiate scene
 function init() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -42,7 +51,7 @@ function init() {
     pluto();
     
     sunlight(0, 0, 0, 0xfff5e5, 1); //get light yellow hex
-    render();
+    animate();
 }
 
 function sunlight( x, y, z, color, intensity ) {
@@ -52,7 +61,7 @@ function sunlight( x, y, z, color, intensity ) {
     var ambient = new THREE.AmbientLight( 0x101010 ); // soft white light
     scene.add( ambient );
 }
-//sun and planets
+//sun and planets geometry
 function sol() {
     var geometry = new THREE.SphereGeometry( 10.926, 32, 16 ); //scaled down by a decimal place from earth scaling
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/sun.jpg' ) : undefined);
@@ -70,9 +79,9 @@ function mercury() {
     var geometry = new THREE.SphereGeometry(0.38, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mercury.jpg' ) : undefined);
     var material = new THREE.MeshLambertMaterial( useTextures? { map : tex } : {color:0x999999});
-    var merc = new THREE.Mesh(geometry, material);
+    merc = new THREE.Mesh(geometry, material);
     merc.translateX(18.8095); //taking into account the slightly changed size of the sun
-    orbit.add(merc);
+    scene.add(merc);
 }
 function venus() {
     //line
@@ -84,9 +93,9 @@ function venus() {
     var geometry = new THREE.SphereGeometry(0.97, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/venus.jpg' ) : undefined);
     var material = new THREE.MeshLambertMaterial(useTextures ? {map : tex} : {color:0xffba33});
-    var ven = new THREE.Mesh (geometry, material);
+    ven = new THREE.Mesh (geometry, material);
     ven.translateX(29.5822); //all distances have 18.8095 (mercury distance from sun) added to them
-    orbit.add(ven);
+    scene.add(ven);
 }
 function earth() {
    //line
@@ -98,9 +107,9 @@ function earth() {
     var geometry = new THREE.SphereGeometry(1, 32, 16); //everything is scaled to earth size
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/earth.png' ) : undefined);
     var material = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x00b38e});
-    var terra = new THREE.Mesh(geometry, material);
+    terra = new THREE.Mesh(geometry, material);
     terra.translateX(32.995);
-    orbit.add(terra);
+    scene.add(terra);
 }
 function mars() {
     //line
@@ -112,9 +121,9 @@ function mars() {
     var geom = new THREE.SphereGeometry(0.53, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mars.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xb34700});
-    var ares = new THREE.Mesh(geom, mat);
+    ares = new THREE.Mesh(geom, mat);
     ares.translateX(41.4575);
-    orbit.add(ares);
+    scene.add(ares);
 }
 function jupiter() {
     //line
@@ -128,7 +137,7 @@ function jupiter() {
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffcb80});
     var jove = new THREE.Mesh(geom, mat);
     jove.translateX(81.3895); //however, since we removed the asteroid belt after mars, we are now adding 3.9095 (width of asteroid belt (1 AU) subtracted from mercury's distance to the sun)
-    orbit.add(jove);
+    scene.add(jove);
 }
 function saturn() {
     //line
@@ -142,7 +151,7 @@ function saturn() {
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffffb3});
     var sat = new THREE.Mesh(geom, mat);
     sat.translateX(146.6515);
-    orbit.add(sat);
+    scene.add(sat);
 }
 function uranus() {
     //line
@@ -156,7 +165,7 @@ function uranus() {
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x1f7a7a});
     var badJoke = new THREE.Mesh(geom, mat);
     badJoke.translateX(218.3205); //distance between saturn and uranus halved
-    orbit.add(badJoke);
+    scene.add(badJoke);
 }
 function neptune() {
     //line
@@ -170,7 +179,7 @@ function neptune() {
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x0086b3});
     var nept = new THREE.Mesh(geom, mat);
     nept.translateX(379.9855); //everything else scales accordingly by subtracting 71.669
-    orbit.add(nept);
+    scene.add(nept);
 }
 function pluto() {
     //line
@@ -184,9 +193,28 @@ function pluto() {
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffccb3});
     var plu = new THREE.Mesh(geom, mat);
     plu.translateX(520.4925);
-    orbit.add(plu);
+    scene.add(plu);
 }
 
+//animation
+var clock = new THREE.Clock();
+var r = sma[2]*32.995;
+var theta = 0;
+
+function updatePositions(dt) {
+    theta -= dt*(2*Math.PI/30);
+    terra.position.x = r*Math.cos(theta);
+    terra.position.z = r*Math.sin(theta);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    var dt = clock.getDelta();
+    updatePositions(dt);
+    render();
+}
+
+//renderer
 function render() {
 	requestAnimationFrame( render );
 	renderer.render( scene, camera );
