@@ -8,11 +8,16 @@ var merc;
 var ven;
 var terra;
 var ares;
+var jove;
+var sat;
+var badJoke;
+var nept;
+var plu;
 //global variables
 var renderer;
 var scene;
 var camera;
-var useTextures = true;
+var useTextures = false;
 var lineMat = new THREE.MeshBasicMaterial({color:0xffffff});
 //eccentricity values for each planet respectively
 var ecc = [0.205627, 0.006793, 0.016726, 0.093368, 0.048435, 0.055682, 0.047209, 0.008575, 0.250236];
@@ -80,7 +85,7 @@ function mercury() {
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mercury.jpg' ) : undefined);
     var material = new THREE.MeshLambertMaterial( useTextures? { map : tex } : {color:0x999999});
     merc = new THREE.Mesh(geometry, material);
-    merc.translateX(18.8095); //taking into account the slightly changed size of the sun
+    //merc.translateX(18.8095); //taking into account the slightly changed size of the sun
     scene.add(merc);
 }
 function venus() {
@@ -94,7 +99,7 @@ function venus() {
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/venus.jpg' ) : undefined);
     var material = new THREE.MeshLambertMaterial(useTextures ? {map : tex} : {color:0xffba33});
     ven = new THREE.Mesh (geometry, material);
-    ven.translateX(29.5822); //all distances have 18.8095 (mercury distance from sun) added to them
+    //ven.translateX(29.5822); //all distances have 18.8095 (mercury distance from sun) added to them
     scene.add(ven);
 }
 function earth() {
@@ -108,7 +113,7 @@ function earth() {
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/earth.png' ) : undefined);
     var material = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x00b38e});
     terra = new THREE.Mesh(geometry, material);
-    terra.translateX(32.995);
+    //terra.translateX(32.995);
     scene.add(terra);
 }
 function mars() {
@@ -122,7 +127,7 @@ function mars() {
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/mars.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xb34700});
     ares = new THREE.Mesh(geom, mat);
-    ares.translateX(41.4575);
+    //ares.translateX(41.4575);
     scene.add(ares);
 }
 function jupiter() {
@@ -135,8 +140,8 @@ function jupiter() {
     var geom = new THREE.SphereGeometry(4.74, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/jupiter.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffcb80});
-    var jove = new THREE.Mesh(geom, mat);
-    jove.translateX(81.3895); //however, since we removed the asteroid belt after mars, we are now adding 3.9095 (width of asteroid belt (1 AU) subtracted from mercury's distance to the sun)
+    jove = new THREE.Mesh(geom, mat);
+    //jove.translateX(81.3895); //however, since we removed the asteroid belt after mars, we are now adding 3.9095 (width of asteroid belt (1 AU) subtracted from mercury's distance to the sun)
     scene.add(jove);
 }
 function saturn() {
@@ -147,10 +152,15 @@ function saturn() {
     scene.add(orbit);
     //planet
     var geom = new THREE.SphereGeometry(5.595, 32, 16);
+    var rings = new THREE.CircleGeometry(15.768, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/saturn.jpg' ) : undefined);
+    var ringMat = new THREE.MeshLambertMaterial({color:0xffffff, side:THREE.DoubleSide});
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffffb3});
-    var sat = new THREE.Mesh(geom, mat);
-    sat.translateX(146.6515);
+    var ringMesh = new THREE.Mesh(rings, ringMat);
+    sat = new THREE.Mesh(geom, mat);
+    //sat.translateX(146.6515);
+    ringMesh.rotation.x = (Math.PI/2-0.01);
+    sat.add(ringMesh);
     scene.add(sat);
 }
 function uranus() {
@@ -163,8 +173,8 @@ function uranus() {
     var geom = new THREE.SphereGeometry(3.69, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/uranus.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x1f7a7a});
-    var badJoke = new THREE.Mesh(geom, mat);
-    badJoke.translateX(218.3205); //distance between saturn and uranus halved
+    badJoke = new THREE.Mesh(geom, mat);
+    //badJoke.translateX(218.3205); //distance between saturn and uranus halved
     scene.add(badJoke);
 }
 function neptune() {
@@ -177,8 +187,8 @@ function neptune() {
     var geom = new THREE.SphereGeometry(3.5, 32, 16);
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/neptune.jpg' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0x0086b3});
-    var nept = new THREE.Mesh(geom, mat);
-    nept.translateX(379.9855); //everything else scales accordingly by subtracting 71.669
+    nept = new THREE.Mesh(geom, mat);
+    //nept.translateX(379.9855); //everything else scales accordingly by subtracting 71.669
     scene.add(nept);
 }
 function pluto() {
@@ -191,26 +201,94 @@ function pluto() {
     var geom = new THREE.SphereGeometry(0.95, 32, 16); //scaled up by a half because i couldnt see it
     var tex = (useTextures ? THREE.ImageUtils.loadTexture( 'images/pluto.png' ) : undefined);
     var mat = new THREE.MeshLambertMaterial(useTextures ? {map:tex} : {color:0xffccb3});
-    var plu = new THREE.Mesh(geom, mat);
-    plu.translateX(520.4925);
+    plu = new THREE.Mesh(geom, mat);
+    //plu.translateX(520.4925);
     scene.add(plu);
 }
 
 //animation
 var clock = new THREE.Clock();
-var r = sma[2]*32.995;
-var theta = 0;
+var theta = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-function updatePositions(dt) {
-    theta -= dt*(2*Math.PI/30);
-    terra.position.x = r*Math.cos(theta);
-    terra.position.z = r*Math.sin(theta);
+//position updater
+
+function updateMercPos(dt) {
+    //var r = sma[0]*32.995;
+    var r = 18.8095;
+    theta[0] -= dt*(2*Math.PI/7.23);
+    merc.position.x = r*Math.cos(theta[0]);
+    merc.position.z = r*Math.sin(theta[0]);
+}
+function updateVenPos(dt) {
+    //var r = sma[1]*32.995;
+    var r = 29.5822;
+    theta[1] -= dt*(2*Math.PI/18.47);
+    ven.position.x = r*Math.cos(theta[1]);
+    ven.position.z = r*Math.sin(theta[1]);
+}
+function updateEarthPos(dt) {
+    //var r = sma[2]*32.995;
+    var r = 32.995;
+    theta[2] -= dt*(2*Math.PI/30);
+    terra.position.x = r*Math.cos(theta[2]);
+    terra.position.z = r*Math.sin(theta[2]);
+}
+function updateMarsPos(dt) {
+    //var r = sma[3]*32.995;
+    var r = 41.4575;
+    theta[3] -= dt*(2*Math.PI/54.986);
+    ares.position.x = r*Math.cos(theta[3]);
+    ares.position.z = r*Math.sin(theta[3]);
+}
+function updateJovePos(dt) {
+    //var r = sma[3]*32.995;
+    var r = 81.3895;
+    theta[4] -= dt*(2*Math.PI/81.3895);
+    jove.position.x = r*Math.cos(theta[4]);
+    jove.position.z = r*Math.sin(theta[4]);
+}
+function updateSatPos(dt) {
+    //var r = sma[3]*32.995;
+    var r = 146.6515;
+    theta[5] -= dt*(2*Math.PI/146.6515);
+    sat.position.x = r*Math.cos(theta[5]);
+    sat.position.z = r*Math.sin(theta[5]);
+}
+function updateUrPos(dt) {
+    //var r = sma[3]*32.995;
+    var r = 218.3205;
+    theta[6] -= dt*(2*Math.PI/218.3205);
+    badJoke.position.x = r*Math.cos(theta[6]);
+    badJoke.position.z = r*Math.sin(theta[6]);
+}
+function updateNeptPos(dt) {
+    //var r = sma[3]*32.995;
+    var r = 379.9855;
+    theta[7] -= dt*(2*Math.PI/379.9855);
+    nept.position.x = r*Math.cos(theta[7]);
+    nept.position.z = r*Math.sin(theta[7]);
+}
+function updatePluPos(dt) {
+    //var r = sma[3]*32.995;
+    var r = 520.4925;
+    theta[8] -= dt*(2*Math.PI/520.4925);
+    plu.position.x = r*Math.cos(theta[8]);
+    plu.position.z = r*Math.sin(theta[8]);
 }
 
+//actual frame drawer
 function animate() {
     requestAnimationFrame(animate);
     var dt = clock.getDelta();
-    updatePositions(dt);
+    updateMercPos(dt);
+    updateVenPos(dt);
+    updateEarthPos(dt);
+    updateMarsPos(dt);
+    updateJovePos(dt);
+    updateSatPos(dt);
+    updateUrPos(dt);
+    updateNeptPos(dt);
+    updatePluPos(dt);
     render();
 }
 
