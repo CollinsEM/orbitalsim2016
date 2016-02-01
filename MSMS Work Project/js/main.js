@@ -17,7 +17,7 @@ var plu;
 var renderer;
 var scene;
 var camera;
-var useTextures = false;
+var useTextures = true;
 var lineMat = new THREE.MeshBasicMaterial({color:0xffffff});
 //eccentricity values for each planet respectively
 var ecc = [0.205627, 0.006793, 0.016726, 0.093368, 0.048435, 0.055682, 0.047209, 0.008575, 0.250236];
