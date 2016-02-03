@@ -25,6 +25,7 @@ var lineMat = new THREE.LineBasicMaterial({color:0xffffff});
 var AU = 32.995;  //multiply sma by AU and get correct radius from the sun
 var DEG = Math.PI/180;
 var N = 360; //points on orbit line
+var T = [7.23, 18.47, 30, 54.986, 355.8, 882.3, 2521.2, 4911.6, 7437.9];
 //eccentricity values for each planet respectively
 var ecc = [0.205627, 0.006793, 0.016726, 0.093368, 0.048435, 0.055682, 0.047209, 0.008575, 0.250236];
 //semi-major axis values for each planet respectively
@@ -341,7 +342,7 @@ var theta = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function updateMercPos(dt) {
     //var r = sma[0]*32.995;
-    theta[0] -= dt*(2*Math.PI/7.23);
+    theta[0] -= dt*(2*Math.PI/T[0]);
     var r = ellipseRadius(sma[0]*AU, ecc[0], theta[0]);
     merc.position.x = r*Math.cos(theta[0]);
     merc.position.z = r*Math.sin(theta[0]);
@@ -349,56 +350,56 @@ function updateMercPos(dt) {
 function updateVenPos(dt) {
     //var r = sma[1]*32.995;
     var r = ellipseRadius(sma[1]*AU, ecc[1], theta[1]);
-    theta[1] -= dt*(2*Math.PI/18.47);
+    theta[1] -= dt*(2*Math.PI/T[1]);
     ven.position.x = r*Math.cos(theta[1]);
     ven.position.z = r*Math.sin(theta[1]);
 }
 function updateEarthPos(dt) {
     //var r = sma[2]*32.995;
     var r = ellipseRadius(sma[2]*AU, ecc[2], theta[2]);
-    theta[2] -= dt*(2*Math.PI/30);
+    theta[2] -= dt*(2*Math.PI/T[2]);
     terra.position.x = r*Math.cos(theta[2]);
     terra.position.z = r*Math.sin(theta[2]);
 }
 function updateMarsPos(dt) {
     //var r = sma[3]*32.995;
     var r = ellipseRadius(sma[3]*AU, ecc[3], theta[3]);
-    theta[3] -= dt*(2*Math.PI/54.986);
+    theta[3] -= dt*(2*Math.PI/T[3]);
     ares.position.x = r*Math.cos(theta[3]);
     ares.position.z = r*Math.sin(theta[3]);
 }
 function updateJovePos(dt) {
     //var r = sma[3]*32.995;
     var r = ellipseRadius(sma[4]*AU, ecc[4], theta[4]);
-    theta[4] -= dt*(2*Math.PI/81.3895);
+    theta[4] -= dt*(2*Math.PI/T[4]);
     jove.position.x = r*Math.cos(theta[4]);
     jove.position.z = r*Math.sin(theta[4]);
 }
 function updateSatPos(dt) {
     //var r = sma[3]*32.995;
     var r = ellipseRadius(sma[5]*AU, ecc[5], theta[5]);
-    theta[5] -= dt*(2*Math.PI/146.6515);
+    theta[5] -= dt*(2*Math.PI/T[5]);
     sat.position.x = r*Math.cos(theta[5]);
     sat.position.z = r*Math.sin(theta[5]);
 }
 function updateUrPos(dt) {
     //var r = sma[3]*32.995;
     var r = ellipseRadius(sma[6]*AU, ecc[6], theta[6]);
-    theta[6] -= dt*(2*Math.PI/218.3205);
+    theta[6] -= dt*(2*Math.PI/T[6]);
     badJoke.position.x = r*Math.cos(theta[6]);
     badJoke.position.z = r*Math.sin(theta[6]);
 }
 function updateNeptPos(dt) {
     //var r = sma[3]*32.995;
     var r = ellipseRadius(sma[7]*AU, ecc[7], theta[7]);
-    theta[7] -= dt*(2*Math.PI/379.9855);
+    theta[7] -= dt*(2*Math.PI/T[7]);
     nept.position.x = r*Math.cos(theta[7]);
     nept.position.z = r*Math.sin(theta[7]);
 }
 function updatePluPos(dt) {
     //var r = sma[3]*32.995;
     var r = ellipseRadius(sma[8]*AU, ecc[8], theta[8]);
-    theta[8] -= dt*(2*Math.PI/520.4925);
+    theta[8] -= dt*(2*Math.PI/T[8]);
     plu.position.x = r*Math.cos(theta[8]);
     plu.position.z = r*Math.sin(theta[8]);
 }
