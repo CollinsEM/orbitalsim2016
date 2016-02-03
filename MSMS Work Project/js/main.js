@@ -1,8 +1,3 @@
-/*
-TO DO:
-- Make orbits elliptical
-*/
-
 //global planet variables
 var merc;
 var ven;
