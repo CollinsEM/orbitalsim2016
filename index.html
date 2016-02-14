@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="stylesheets/github-dark.css">
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <style>
+        p {
+    text-indent: 25px;
+        }
+    </style>
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -30,17 +34,43 @@
         <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Description</h3>
 
-<p>For my MSMS Work Project, I have chosen to create a simulation of the planetary orbits around the Sun using Javascript. With the aid of the <a href="http://threejs.org">three.js</a> library, I was able to create (mostly) accurate 3D models of the ten major astronomical bodies of our solar system. The orbit lines and orbits were also made in three.js.
-    <br><i><b>Note:</b> Sizes and speeds of the Sun and the planets have been scaled up by a constant factor to enhance the visualization.</i>
-    <br>During the creation of this project, I was able to learn more about Kepler's Laws of Planetary Motion (listed below) and how they actually apply to the universe through the math that allowed my planets to simulate their orbits correctly, as well as learning more about and gaining experience in Javascript. Creating this simulator really showed me how vast the Solar System is, especially considering the amount of scaling I had to do in order to get things into view.
-    <br><b>Kepler's Laws:</b>
-    <br> (i) The orbit of each planet is an ellipse with the Sun as the focal point.
-    <br> (ii) Two orbits can cover the same area in the same amount of time.
-    <br> (iii) The ratio of the cube from the distance of the Sun to the square of the period of the time it takes for the planet to go around the Sun is constant for all planets.</p>
+    <p>	As a visual learner, I found it hard to comprehend how the planetary bodies of the solar system moved in relation to one another from just text descriptions and mathematical formulas. When I learned about the field of scientific visualization, which is a discipline dedicated to transforming raw data into graphical depictions that convey insight or understanding into the underlying data, I decided to make that the focus of my MSMS project.
+    <p>A scientific visualization can use data from experiments or computational visualizations. For the purposes of this project we decided to use data from a simulation of Kepler’s laws. This simulation uses ellipses to describe the shape of the planetary orbits as specified by Kepler in his first law of planetary motion: “The orbit of each planet is an ellipse with the Sun at one focus.”
+    <p>The sizes of the planets, as well as the shapes and speeds of their orbits, are determined from known astronomical data, such as planetary radius, eccentricity, semimajor axis, orbital inclination and period. Some of these values are scaled in order to be viewed conveniently, but  still accurately modeled with respect to one another.
+    <p>In the process of creating this visualization of the solar system, I learned more than just astronomy. I also learned about the math and science that goes into creating models and generating visualizations to communicate effectively. I hope that this visualization will help others to understand the solar system as I have come to understand it.</p>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>To open the project in your browser, without having to download, click <a href="http://junebug230.github.io/orbitalsim2016/MSMS Work Project/index.html">here.</a></h3>
+          
+          <h3>Background Information</h3>
+          <p>Astronomy is one of the oldest sciences. We’ve been able to look up at the night sky ever since we first walked the earth. What has really drawn our interest about the heavens is the other major planets in our solar system. Early astronomers discovered these planets followed certain patterns, and they could predict their movements. These were the first astronomical models of planetary motion, the most well known being the Ptolemaic model of the solar system, which placed Earth at the center. This model was considered to be the most accurate for over a thousand years until Copernicus suggested a model with the Sun at the center.
+    <p>Copernicus’s discovery prompted Kepler to inspect the skies from a different angle. When he did so, he discovered a simpler and more accurate model than Ptolemy's. This model showed that the planets followed an elliptical movement around the sun. This insight became the first of his three laws. To this day, Kepler’s description of planetary movement remains mostly accurate, with only minor corrections needed to account for the influence of other astronomical bodies.
+              <p>Despite the success of Kepler’s model, most people don’t have a good intuition about the scale of our solar system, myself included. My project’s goal is to help people understand the scale and orbits through scientific visualization. The field of scientific visualization is dedicated to understanding how to generate visual representations of data in a way that conveys meaning or insight to the viewer.
+              <p>When considering scientific data, it typically comes from one of two sources:  direct observations of physical phenomenon or from calculations derived from mathematical models of the physical phenomenon. Unfortunately, the data itself is not always easily understandable. To gain insight into the data, scientists often utilize various visualization techniques, including charts, graphs and/or animations.
+              <p>I chose to create this project in Javascript because it was the language I was most familiar with and I knew from past experience that I could use the <a href="http://threejs.org">ThreeJS</a> graphics library to render an animated 3D scene. As an added bonus, Javascript is a language that is used by almost all web browsers. This makes programs written in Javascript compatible with all platforms that support modern web browsers.
 
+          </p>
+          
+          <h3>Methods and Process</h3>
+          <p>The nature of scientific visualization software development mimics the scientific method and engineering processes. All three processes go through the same steps: identify a problem or question, come up with an idea, execute the idea and then revise until you reach the end goal.  For all three process, the primary concern is with accurate data and the primary activity is iteration. For this project, the data is generated from Kepler’s model of the solar system, and the 3D visualization was done using Javascript and ThreeJS.
+
+<p>Kepler’s Laws:
+    <ol><i>
+        <li>The orbit of each planet is an ellipse with the Sun at one focus.
+        <li>For any planet the rate of description of area by the radius vector joining planet to Sun is constant.
+	    <li>The cubes of the semimajor axes of the planetary orbits are proportional to the squares of the planets’ periods of revolution.<sup>1</sup></i></ol>
+
+<p>For an elliptic orbit, the distance of the planet from the Sun can be calculated by this equation: 
+    <br/><center><img src="ellipse.png"></center>
+    <br/>where a is the <i>semimajor axis</i> (or the long direction of the ellipse), e is <i>eccentricity</i>, which is a measure of how the ellipse differs from a circle (a value of 0 is a circle, while increasing values are further from being circles), and f is the angle specifying the location of the planet within its orbit. This angle is measured with respect to <i>perihelion</i> (the position of the planet when it is closest to the Sun).
+    <p><p>The development of this project went through many iterations until it reached the final product. With each iteration I added new features to improve the model or enhance the visualization. After each feature was tested and debugged, I had to ask myself if this was good enough or if it needed more. If it needed more, I went through another iteration and asked the same questions until it was done.
+<p>To visualize the Sun and planets, I started out with just the spheres representing each planet with their correctly scaled distances from the Sun. Seeing that these distances were too large for them all to be seen, I cut them down radically, decreasing the space between them. After I got everything spaced out, I used a convenient torus geometry to make circular orbit lines. Later I switched to a more complex elliptical geometry, rendered as many line segments, to display the orbit lines. These elliptical orbit lines were also rotated and tilted to their correct orientations.  Finally, the sizes of the Sun and planets were scaled up to make them easier to see. The Sun was scaled to 35 times it’s actual size, while the planets were scaled by a factor of 700 (20 times the Sun’s scale).
+<p>To show the motion of the planets, I first started moving the Earth along its orbit. I then scaled all of the other planets’ orbit timings off of the Earth’s. This process took many iterations in order to get things to look right.
+          </p>
+          
+          <h3>Results</h3>
+    <p>	The goal of my project was to be able to create a beautifully working Javascript simulation of the planets orbiting around the sun in super-real time following Kepler’s Laws as accurately as I could. I’ve achieved this by having all of the planets on their correctly tilted orbits, orbiting in a properly scaled format with properly scaled sizes and shapes. The speeds of the planets have been scaled up, but are still accurate with respect to one another. Likewise, the size of the planets have also been scaled to make them more visible.  The positions, shapes, and orientations of the orbits are as accurate as possible with the given astronomical data values and within the limits of the 3D visualization library.
+        
 <h3>
 <a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the Work Project</h3>
 
@@ -49,12 +79,15 @@
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h3>
 
-<p>Thanks to my dad for helping me out when things got tricky, especially in the math and code. Thank you, MSMS, for giving me the opportunity to exercise my skill in programming, math and science. And a big thank you to all my friends who kept asking "Hey, is your application done yet?" and other such encouragement. ;)</p>
+<p>Thanks to my dad for helping me out when things got tricky, especially in the math and code, and during crunch time when we whipped up the extra information, and to my mom for looking over all of it in the end when our eyes got tired of looking at the wall of text. Thank you, MSMS, for giving me the opportunity to exercise my skill in programming, math and science, and the biggest thank you to all my friends and family who kept asking "Hey, is your application done yet?" and keeping me in mind and motivated as the deadline drew closer and closer.</p>
 
 <h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+          
+        <hr>
+        <sup>1</sup> <i>Orbital Motion</i> by A. E. Roy, Third Edition, page 4.
       </section>
     </div>
     <footer>
